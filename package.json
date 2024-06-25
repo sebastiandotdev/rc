@@ -1,0 +1,31 @@
+{
+  "name": "@castrogarciajs/src",
+  "type": "module",
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.4.0",
+  "description": "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.",
+  "author": "castrogarciajs",
+  "license": "MIT",
+  "keywords": [
+    "REST",
+    "API",
+    "Client",
+    "RESTful",
+    "Simple",
+    "Command-line",
+    "Tool",
+    "CLI"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --fix",
+    "clean": "pnpm dlx rimraf dist pnpm-lock.yaml node_modules"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^2.21.1",
+    "eslint": "^8.57.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-format": "^0.1.2"
+  }
+}
