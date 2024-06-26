@@ -6,6 +6,7 @@
   "description": "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.",
   "author": "castrogarciajs",
   "license": "MIT",
+  "repository": "nuxt/cli",
   "keywords": [
     "REST",
     "API",
@@ -16,16 +17,21 @@
     "Tool",
     "CLI"
   ],
-  "main": "index.js",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint . --fix",
+    "build": "unbuild",
     "clean": "pnpm dlx rimraf dist pnpm-lock.yaml node_modules"
   },
-  "dependencies": {
-    "@antfu/eslint-config": "^2.21.1",
-    "eslint": "^8.57.0"
-  },
   "devDependencies": {
-    "eslint-plugin-format": "^0.1.2"
+    "@antfu/eslint-config": "^2.21.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-format": "^0.1.2",
+    "unbuild": "^2.0.0"
   }
 }
