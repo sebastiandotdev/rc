@@ -1,12 +1,12 @@
 {
-  "name": "@castrogarciajs/src",
+  "name": "env",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@9.4.0",
   "description": "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.",
   "author": "castrogarciajs",
   "license": "MIT",
-  "repository": "nuxt/cli",
+  "repository": "castrogarciajs/src",
   "keywords": [
     "REST",
     "API",
@@ -20,16 +20,27 @@
   "exports": {
     ".": "./dist/index.mjs"
   },
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "src": "./bin/env.mjs"
+  },
   "files": [
+    "bin",
     "dist"
   ],
   "scripts": {
+    "dev": "node ./bin/env.mjs src",
     "lint": "eslint . --fix",
     "build": "unbuild",
     "clean": "pnpm dlx rimraf dist pnpm-lock.yaml node_modules"
   },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "consola": "^3.2.3"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.1",
+    "@types/node": "^20.14.9",
     "eslint": "^8.57.0",
     "eslint-plugin-format": "^0.1.2",
     "unbuild": "^2.0.0"
