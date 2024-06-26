@@ -14,7 +14,7 @@ const commandList: CommandName[] = ['init']
 rc
   .name('rc')
   .usage('<command> [options]')
-  .description('Source code management')
+  .description(chalk.bold.gray('Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.'))
   .version(packageJSON.version, chalk.blue('-v, --version', 'output the current version'))
   .helpOption(chalk.blue('-h, --help', 'Display help for command'))
   .allowUnknownOption()
