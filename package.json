@@ -29,12 +29,12 @@
     "dist"
   ],
   "scripts": {
-    "dev": "node ./bin/rc.mjs rc",
     "lint": "eslint . --fix",
     "build": "unbuild",
     "clean": "pnpm dlx rimraf dist pnpm-lock.yaml node_modules"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "consola": "^3.2.3"
   },
