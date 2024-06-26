@@ -1,12 +1,12 @@
 {
-  "name": "env",
+  "name": "@castrogarciajs/rc",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@9.4.0",
   "description": "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.",
   "author": "castrogarciajs",
   "license": "MIT",
-  "repository": "castrogarciajs/src",
+  "repository": "castrogarciajs/rc",
   "keywords": [
     "REST",
     "API",
@@ -22,14 +22,14 @@
   },
   "types": "./dist/index.d.ts",
   "bin": {
-    "src": "./bin/env.mjs"
+    "rc": "./bin/rc.mjs"
   },
   "files": [
     "bin",
     "dist"
   ],
   "scripts": {
-    "dev": "node ./bin/env.mjs src",
+    "dev": "node ./bin/rc.mjs rc",
     "lint": "eslint . --fix",
     "build": "unbuild",
     "clean": "pnpm dlx rimraf dist pnpm-lock.yaml node_modules"
