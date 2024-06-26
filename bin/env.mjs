@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-await import('../dist/index.mjs')
+'use strict'
+
+import('../dist/index.mjs')
