@@ -53,4 +53,5 @@ rc
   .action(() => {
     consola.info('init command')
   })
+
 rc.parse()
