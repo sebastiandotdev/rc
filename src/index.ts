@@ -33,16 +33,24 @@ rc
           return
         }
 
-        consola.error(`Unknown command '${args}', Did you mean '${chalk.underline(matchCommand)}'?`)
+        consola.warn(`Unknown command '${args}', Did you mean '${chalk.underline(matchCommand)}'?`)
       }
     }
 
     if (!isArgs) {
-      consola.box(chalk.bold.green(`RC Generation CLI Experience (rc v${packageJSON.version})`))
+      consola.box(chalk.bold.blue(`RC Generation CLI Experience (rc v${packageJSON.version})`))
       command.help()
     }
 
     process.exit(0)
   })
 
+rc
+  .command('init')
+  .description(chalk.bold.gray('⚡ Welcome to the Simple REST Client CLI'))
+  .argument('[URL]', 'The URL of the API you want to interact with')
+  .option('-m, --method <method>', 'HTTP method to use', 'GET')
+  .action(() => {
+    consola.info('init command')
+  })
 rc.parse()
