@@ -15,7 +15,7 @@ Simple REST Client is an easy-to-use command-line tool for interacting with REST
 node ./bin/rc.mjs
 ```
 
-![937shots_so](https://github.com/castrogarciajs/rc/assets/116913262/086be33b-ff61-4a8a-abb3-5e9b508df758)
+<img src="./resources/rc-cli-shots.png" />
 
 ### Why should use Simple REST Client?
 
