@@ -50,6 +50,7 @@ rc
   .command('init')
   .description(chalk.bold.gray('Initialize a new REST Client'))
   .argument('[BASE_URL]', 'The base URL of the API you want to interact with')
+  .helpOption('-h, --help', 'Display help for command')
   .option('-m, --method <method>', 'HTTP method to use', 'GET')
   .action(() => {
     consola.info('init command')
@@ -59,6 +60,7 @@ rc
   .command('get')
   .description(chalk.bold.gray('Make a GET request to the API'))
   .argument(methodDescriptions)
+  .helpOption('-h, --help', 'Display help for command')
   .option('-i, --id <id>', 'The ID of the resource you want to get')
   .option('-q, --query <query>', 'Query parameters to send with the request')
   .option('-h, --header <header>', 'Headers to send with the request')
@@ -70,6 +72,7 @@ rc
   .command('post')
   .description(chalk.bold.gray('Make a POST request to the API'))
   .argument(methodDescriptions)
+  .helpOption('-h, --help', 'Display help for command')
   .option('-b, --body <body>', 'The body of the request')
   .option('-h, --header <header>', 'Headers to send with the request')
   .action(() => {
@@ -80,6 +83,7 @@ rc
   .command('put')
   .description(chalk.bold.gray('Make a PUT request to the API'))
   .argument(methodDescriptions)
+  .helpOption('-h, --help', 'Display help for command')
   .option('-i, --id <id>', 'The ID of the resource you want to update')
   .option('-b, --body <body>', 'The body of the request')
   .option('-h, --header <header>', 'Headers to send with the request')
@@ -91,6 +95,7 @@ rc
   .command('patch')
   .description(chalk.bold.gray('Make a PATCH request to the API'))
   .argument(methodDescriptions)
+  .helpOption('-h, --help', 'Display help for command')
   .option('-i, --id <id>', 'The ID of the resource you want to update')
   .option('-b, --body <body>', 'The body of the request')
   .option('-h, --header <header>', 'Headers to send with the request')
@@ -102,6 +107,7 @@ rc
   .command('delete')
   .description(chalk.bold.gray('Make a DELETE request to the API'))
   .argument(methodDescriptions)
+  .helpOption('-h, --help', 'Display help for command')
   .option('-i, --id <id>', 'The ID of the resource you want to delete')
   .option('-h, --header <header>', 'Headers to send with the request')
   .action(() => {
