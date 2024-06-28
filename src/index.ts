@@ -50,6 +50,7 @@ rc
   .command('init')
   .description(chalk.bold.gray('Initialize a new REST Client'))
   .argument('[BASE_URL]', 'The base URL of the API you want to interact with')
+  .helpOption('-h, --help', 'Display help for command')
   .option('-m, --method <method>', 'HTTP method to use', 'GET')
   .action(() => {
     consola.info('init command')
