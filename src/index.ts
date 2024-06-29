@@ -6,6 +6,7 @@ import packageJSON from '../package.json' assert { type: 'json' }
 import { findMostMatchText } from './helpers/diff'
 import { descriptionRC, helpDescription, methodDescriptions } from './constants/messages'
 import { bodyOption, headerOption, helpOption, idOption, queryOption } from './constants/options'
+import { initAction } from './actions'
 
 const rc = new Command()
 
@@ -50,12 +51,10 @@ rc
 rc
   .command('init')
   .description(chalk.bold.gray('Initialize a new REST Client'))
-  .argument('[BASE_URL]', 'The base URL of the API you want to interact with')
+  .argument('[baseURL]', 'The base URL of the API you want to interact with')
   .helpOption(helpOption, helpDescription)
   .option('-m, --method <method>', 'HTTP method to use', 'GET')
-  .action(() => {
-    consola.info('init command')
-  })
+  .action(initAction)
 
 rc
   .command('get')
