@@ -4,7 +4,8 @@ import consola from 'consola'
 import chalk from 'chalk'
 import packageJSON from '../package.json' assert { type: 'json' }
 import { findMostMatchText } from './helpers/diff'
-import { methodDescriptions } from './constants/messages'
+import { descriptionRC, helpDescription, methodDescriptions } from './constants/messages'
+import { bodyOption, headerOption, helpOption, idOption, queryOption } from './constants/options'
 
 const rc = new Command()
 
@@ -15,9 +16,9 @@ const commandList: CommandName[] = ['init', 'get', 'post', 'put', 'patch', 'dele
 rc
   .name('rc')
   .usage('<command> [options]')
-  .description(chalk.bold.gray('Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.'))
-  .version(packageJSON.version, chalk.blue('-v, --version', 'output the current version'))
-  .helpOption(chalk.blue('-h, --help', 'Display help for command'))
+  .description(chalk.bold.gray(descriptionRC))
+  .version(packageJSON.version, '-v, --version', 'output the current version')
+  .helpOption(helpOption, helpDescription)
   .allowUnknownOption()
   .action((_, command) => {
     let isArgs = false
@@ -50,7 +51,7 @@ rc
   .command('init')
   .description(chalk.bold.gray('Initialize a new REST Client'))
   .argument('[BASE_URL]', 'The base URL of the API you want to interact with')
-  .helpOption('-h, --help', 'Display help for command')
+  .helpOption(helpOption, helpDescription)
   .option('-m, --method <method>', 'HTTP method to use', 'GET')
   .action(() => {
     consola.info('init command')
@@ -60,10 +61,10 @@ rc
   .command('get')
   .description(chalk.bold.gray('Make a GET request to the API'))
   .argument(methodDescriptions)
-  .helpOption('-h, --help', 'Display help for command')
-  .option('-i, --id <id>', 'The ID of the resource you want to get')
-  .option('-q, --query <query>', 'Query parameters to send with the request')
-  .option('-h, --header <header>', 'Headers to send with the request')
+  .helpOption(helpOption, helpDescription)
+  .option(idOption, 'The ID of the resource you want to get')
+  .option(queryOption, 'Query parameters to send with the request')
+  .option(headerOption, headerOption)
   .action(() => {
     consola.info('get command')
   })
@@ -72,9 +73,9 @@ rc
   .command('post')
   .description(chalk.bold.gray('Make a POST request to the API'))
   .argument(methodDescriptions)
-  .helpOption('-h, --help', 'Display help for command')
-  .option('-b, --body <body>', 'The body of the request')
-  .option('-h, --header <header>', 'Headers to send with the request')
+  .helpOption(helpOption, helpDescription)
+  .option(bodyOption, 'The body of the request')
+  .option(headerOption, 'Headers to send with the request')
   .action(() => {
     consola.info('post command')
   })
@@ -83,10 +84,10 @@ rc
   .command('put')
   .description(chalk.bold.gray('Make a PUT request to the API'))
   .argument(methodDescriptions)
-  .helpOption('-h, --help', 'Display help for command')
-  .option('-i, --id <id>', 'The ID of the resource you want to update')
-  .option('-b, --body <body>', 'The body of the request')
-  .option('-h, --header <header>', 'Headers to send with the request')
+  .helpOption(helpOption, helpDescription)
+  .option(idOption, 'The ID of the resource you want to update')
+  .option(bodyOption, 'The body of the request')
+  .option(headerOption, headerOption)
   .action(() => {
     consola.info('put command')
   })
@@ -95,10 +96,10 @@ rc
   .command('patch')
   .description(chalk.bold.gray('Make a PATCH request to the API'))
   .argument(methodDescriptions)
-  .helpOption('-h, --help', 'Display help for command')
-  .option('-i, --id <id>', 'The ID of the resource you want to update')
-  .option('-b, --body <body>', 'The body of the request')
-  .option('-h, --header <header>', 'Headers to send with the request')
+  .helpOption(helpOption, helpDescription)
+  .option(idOption, 'The ID of the resource you want to update')
+  .option(bodyOption, 'The body of the request')
+  .option(headerOption, headerOption)
   .action(() => {
     consola.info('patch command')
   })
@@ -107,9 +108,9 @@ rc
   .command('delete')
   .description(chalk.bold.gray('Make a DELETE request to the API'))
   .argument(methodDescriptions)
-  .helpOption('-h, --help', 'Display help for command')
-  .option('-i, --id <id>', 'The ID of the resource you want to delete')
-  .option('-h, --header <header>', 'Headers to send with the request')
+  .helpOption(helpOption, helpDescription)
+  .option(idOption, 'The ID of the resource you want to delete')
+  .option(headerOption, headerOption)
   .action(() => {
     consola.info('delete command')
   })
