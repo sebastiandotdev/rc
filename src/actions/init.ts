@@ -1,7 +1,6 @@
 import { setTimeout } from 'node:timers/promises'
 import * as p from '@clack/prompts'
 import chalk from 'chalk'
-import consola from 'consola'
 import { selectCommand, spinner } from '../helpers/utils'
 
 const httpMethods = [
@@ -28,8 +27,8 @@ const httpMethods = [
 ]
 
 export async function initAction(baseURL: string | undefined) {
-  consola.box(chalk.bold.blue('⚡ Initialize a new REST Client powered by RC ⚡'))
-  p.intro(chalk.bold.green('Building a REST Client is as easy as 1-2-3! 🚀'))
+  p.intro(chalk.bold.blue('⚡ Initialize a new REST Client powered by RC ⚡'))
+  p.log.step(chalk.bold.green('Building a REST Client is as easy as 1-2-3! 🚀'))
   let isNotURL = false
 
   await selectCommand({

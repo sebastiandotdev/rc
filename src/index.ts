@@ -1,7 +1,7 @@
 import process from 'node:process'
 import { Command } from 'commander'
-import consola from 'consola'
 import chalk from 'chalk'
+import { intro, log } from '@clack/prompts'
 import packageJSON from '../package.json' assert { type: 'json' }
 import { findMostMatchText } from './helpers/diff'
 import { descriptionRC, helpDescription, methodDescriptions } from './constants/messages'
@@ -17,11 +17,12 @@ const commandList: CommandName[] = ['init', 'get', 'post', 'put', 'patch', 'dele
 rc
   .name('rc')
   .usage('<command> [options]')
-  .description(chalk.bold.gray(descriptionRC))
   .version(packageJSON.version, '-v, --version', 'output the current version')
   .helpOption(helpOption, helpDescription)
   .allowUnknownOption()
   .action((_, command) => {
+    intro(chalk.bold.blue(`RC Generation CLI Experience (rc v${packageJSON.version})`))
+    log.message(chalk.bold.gray(descriptionRC))
     let isArgs = false
 
     if (command) {
@@ -32,17 +33,16 @@ rc
         const matchCommand = findMostMatchText(commandList, args)
 
         if (!matchCommand) {
-          consola.error(`Unknown command '${args}'`)
+          log.error(`The '${args}' command is not available in RC Unknown command `)
           return
         }
 
-        consola.warn(`Unknown command '${args}', Did you mean '${chalk.underline(matchCommand)}'?`)
+        log.info(`Unknown command '${args}', Did you mean '${chalk.underline(matchCommand)}'?`)
       }
     }
 
     if (!isArgs) {
-      consola.box(chalk.bold.blue(`RC Generation CLI Experience (rc v${packageJSON.version})`))
-      command.help()
+      log.info('Please run `rc --help` to see available commands')
     }
 
     process.exit(0)
@@ -64,9 +64,6 @@ rc
   .option(idOption, 'The ID of the resource you want to get')
   .option(queryOption, 'Query parameters to send with the request')
   .option(headerOption, headerOption)
-  .action(() => {
-    consola.info('get command')
-  })
 
 rc
   .command('post')
@@ -75,9 +72,6 @@ rc
   .helpOption(helpOption, helpDescription)
   .option(bodyOption, 'The body of the request')
   .option(headerOption, 'Headers to send with the request')
-  .action(() => {
-    consola.info('post command')
-  })
 
 rc
   .command('put')
@@ -87,9 +81,6 @@ rc
   .option(idOption, 'The ID of the resource you want to update')
   .option(bodyOption, 'The body of the request')
   .option(headerOption, headerOption)
-  .action(() => {
-    consola.info('put command')
-  })
 
 rc
   .command('patch')
@@ -99,9 +90,6 @@ rc
   .option(idOption, 'The ID of the resource you want to update')
   .option(bodyOption, 'The body of the request')
   .option(headerOption, headerOption)
-  .action(() => {
-    consola.info('patch command')
-  })
 
 rc
   .command('delete')
@@ -110,8 +98,5 @@ rc
   .helpOption(helpOption, helpDescription)
   .option(idOption, 'The ID of the resource you want to delete')
   .option(headerOption, headerOption)
-  .action(() => {
-    consola.info('delete command')
-  })
 
 rc.parse()
