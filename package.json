@@ -1,7 +1,7 @@
 {
   "name": "@castrogarciajs/rc",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packageManager": "pnpm@9.4.0",
   "description": "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.",
   "author": "castrogarciajs",
@@ -25,8 +25,11 @@
     "rc": "./bin/rc.mjs"
   },
   "files": [
+    "LICENSE",
+    "README.md",
     "bin",
-    "dist"
+    "dist",
+    "package.json"
   ],
   "scripts": {
     "lint": "eslint . --fix",
