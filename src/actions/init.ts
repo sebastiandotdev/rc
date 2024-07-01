@@ -37,7 +37,7 @@ async function isURLValid(URL: string | symbol) {
     throw new TypeError('Base URL must be a string')
   }
 
-  if (!URL.startsWith('http://') || !URL.startsWith('https://')) {
+  if (!URL.startsWith('http://') && !URL.startsWith('https://')) {
     throw new Error('Invalid URL')
   }
 }
@@ -61,8 +61,6 @@ export async function initAction() {
     task: isURLValid(baseURL),
     text: 'Checking if you have a base URL...',
     failText: 'Failed. Please provide a base URL to continue.',
-    successText: 'Base URL found!',
+    successText: 'Success. Your URL is valid',
   })
-
-  p.log.info('You have successfully initialized a new REST Client! 🎉')
 }

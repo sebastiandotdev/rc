@@ -41,11 +41,11 @@ export async function taskCommand<T>(opts: TaskClackOptions<T>) {
 
   try {
     spinner.start(text)
-
     result = await (task as any)
     spinner.stop(successText)
   }
   catch (error) {
+    spinner.stop()
     cancel(failText)
   }
 
