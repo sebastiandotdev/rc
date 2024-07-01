@@ -51,9 +51,7 @@ rc
 rc
   .command('init')
   .description(chalk.bold.gray('Initialize a new REST Client'))
-  .argument('[baseURL]', 'The base URL of the API you want to interact with')
   .helpOption(helpOption, helpDescription)
-  .option('-m, --method <method>', 'HTTP method to use', 'GET')
   .action(initAction)
 
 rc
