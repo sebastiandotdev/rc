@@ -2,6 +2,7 @@ import { setTimeout } from 'node:timers/promises'
 import * as p from '@clack/prompts'
 import chalk from 'chalk'
 import { selectCommand, taskCommand, textCommand } from '../helpers/utils'
+import { buildFetchToServer } from '../helpers/fetch'
 
 const httpMethods = [
   {
@@ -40,6 +41,8 @@ async function isURLValid(URL: string | symbol) {
   if (!URL.startsWith('http://') && !URL.startsWith('https://')) {
     throw new Error('Invalid URL')
   }
+
+  return true
 }
 
 export async function initAction() {
@@ -49,18 +52,28 @@ export async function initAction() {
   const baseURL = await textCommand({
     message: 'Enter the base URL of the API you want to interact with',
     placeholder: 'https://api.example.com',
-  })
+  }) as string
 
-  await selectCommand({
+  const method = await selectCommand({
     initialValue: 'GET',
     message: 'Select the HTTP method to use',
     options: httpMethods,
-  })
+  }) as string
 
-  await taskCommand({
+  const validated = await taskCommand({
     task: isURLValid(baseURL),
     text: 'Checking if you have a base URL...',
     failText: 'Failed. Please provide a base URL to continue.',
     successText: 'Success. Your URL is valid',
+  })
+
+  if (!validated)
+    return
+
+  await taskCommand({
+    task: buildFetchToServer({ method, baseURL }),
+    text: 'Sending request to the server...',
+    failText: 'Failed to send request to the server',
+    successText: 'Request sent successfully',
   })
 }
