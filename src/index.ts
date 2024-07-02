@@ -50,8 +50,6 @@ rc
 
 rc
   .command('init')
-  .description(chalk.bold.gray('Initialize a new REST Client'))
-  .helpOption(helpOption, helpDescription)
   .action(initAction)
 
 rc
