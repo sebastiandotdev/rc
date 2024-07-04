@@ -3,6 +3,7 @@ import * as p from '@clack/prompts'
 import chalk from 'chalk'
 import { selectCommand, taskCommand, textCommand } from '../helpers/utils'
 import { buildFetchToServer } from '../helpers/fetch'
+import { validatedBaseURL } from '../helpers/verify-url-base'
 
 const httpMethods = [
   {
@@ -60,14 +61,24 @@ export async function initAction() {
     options: httpMethods,
   }) as string
 
-  const validated = await taskCommand({
+  const isURLValidated = await taskCommand({
     task: isURLValid(baseURL),
     text: 'Checking if you have a base URL...',
     failText: 'Failed. Please provide a base URL to continue.',
     successText: 'Success. Your URL is valid',
   })
 
-  if (!validated)
+  if (!isURLValidated)
+    return
+
+  const isURLCorrected = await taskCommand({
+    task: validatedBaseURL(baseURL),
+    text: 'Checking if you have a base URL...',
+    failText: 'Oh no! Your URL is invalid.',
+    successText: 'Success. Your URL is valid',
+  })
+
+  if (!isURLCorrected)
     return
 
   await taskCommand({
