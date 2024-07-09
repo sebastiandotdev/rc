@@ -19,7 +19,7 @@ node ./bin/rc.mjs init
 
 Simple REST Client can help you to be more productive by making it easier and faster to interact with RESTful APIs. This can help you to get your work done more quickly and efficiently. And even more if you are one of those people who love to use the terminal.
 
-## Guide
+## Usage
 
 ### License
 
