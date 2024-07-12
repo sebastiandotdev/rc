@@ -23,6 +23,6 @@ Simple REST Client can help you to be more productive by making it easier and fa
 
 ## Documentation
 
-### License
+## License
 
 This project is under the **MIT** license.
