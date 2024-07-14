@@ -63,7 +63,7 @@ export async function initAction() {
 
   const isURLValidated = await taskCommand({
     task: isURLValid(baseURL),
-    text: 'Checking if you have a base URL...',
+    text: 'Checking if you have a b ase URL...',
     failText: 'Failed. Please provide a base URL to continue.',
     successText: 'Success. Your URL is valid',
   })
@@ -71,15 +71,12 @@ export async function initAction() {
   if (!isURLValidated)
     return
 
-  const isURLCorrected = await taskCommand({
-    task: validatedBaseURL(baseURL),
-    text: 'Checking if you have a base URL...',
-    failText: 'Oh no! Your URL is invalid.',
-    successText: 'Success. Your URL is valid',
-  })
+  const requestValidated = await validatedBaseURL(baseURL)
 
-  if (!isURLCorrected)
+  if (!requestValidated) {
+    p.log.error(requestValidated)
     return
+  }
 
   await taskCommand({
     task: buildFetchToServer({ method, baseURL }),
