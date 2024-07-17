@@ -21,7 +21,9 @@ Simple REST Client can help you to be more productive by making it easier and fa
 
 ## Usage
 
-## Documentation
+## How do I read the documentation?
+
+Code-related documentation can be found in the [docs](./docs/) folder.
 
 ## License
 
