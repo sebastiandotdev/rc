@@ -27,4 +27,4 @@ Code-related documentation can be found in the [docs](./docs/) folder.
 
 ## License
 
-This project is under the **MIT** license.
+RC is under the **MIT** license.
