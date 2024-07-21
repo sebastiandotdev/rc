@@ -39,7 +39,7 @@ Actually only we have support to JSON
 // rc.json
 
 {
-  "baseURL": "http:localhost:3000",
+  "baseURL": "http://localhost:3000",
   "methods": ["GET", "POST", "PATCH", "DELETE"]
 }
 ```
