@@ -13,36 +13,9 @@ Simple REST Client is an easy-to-use command-line tool for interacting with REST
 
 Simple REST Client can help you to be more productive by making it easier and faster to interact with RESTful APIs. This can help you to get your work done more quickly and efficiently. And even more if you are one of those people who love to use the terminal.
 
-## Usage
+## Installation
 
-The use of RC is very easy. we are working to make it intuitive with great development experience
-
-### Initialize a file configuration for RC
-
-1. It will create a file globally.
-
-```zsh
-rc init --config --global
-```
-
-2. It will create a file locally.
-
-```zsh
-rc init --config --local
-```
-
-### Config file
-
-Actually only we have support to JSON
-
-```jsonc
-// rc.json
-
-{
-  "baseURL": "http://localhost:3000",
-  "methods": ["GET", "POST", "PATCH", "DELETE"]
-}
-```
+## Your first RC request
 
 ## How do I read the documentation?
 
