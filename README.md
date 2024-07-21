@@ -46,6 +46,9 @@ Actually only we have support to JSON
 
 ## How do I read the documentation?
 
+> [!NOTE]
+> This documentation is in constant work. If you would like to contribute write to me on [X](https://x.com/sebastiandotdev)
+
 Code-related documentation can be found in the [docs](./docs/) folder.
 
 ## License
