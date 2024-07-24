@@ -37,7 +37,8 @@ fn init_project(init_flags: Args) -> Result<(), std::io::Error> {
       "rc.config.json",
       &json!({
         "baseURL": "http://localhost:3000",
-        "methods": ["GET", "POST", "DELETE", "PATCH"]
+        "methods": ["GET", "POST", "DELETE", "PATCH"],
+        "mode": "Local"
       }),
     )?;
     info!("✅ {}", "Project initialized");
