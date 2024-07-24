@@ -1,9 +1,9 @@
 use clap::Parser;
 use log::info;
 use serde_json::{json, to_string_pretty, Value};
-use std::{env, fs};
-use std::io::{Write, Error};
+use std::io::{Error, Write};
 use std::path::Path;
+use std::{env, fs};
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -17,7 +17,12 @@ struct Args {
 fn main() {
   let args = Args::parse();
 
-  let _ = init_project(args);
+  match init_project(args) {
+   Ok(()) => {}
+    Err(err) => {
+      eprintln!("{}", err)
+    }    
+  }
 }
 
 fn init_project(init_flags: Args) -> Result<(), std::io::Error> {
@@ -58,11 +63,7 @@ fn create_json_file(
   create_file(dir, filename, &text)
 }
 
-fn create_file(
-  dir: &Path,
-  filename: &str,
-  content: &str,
-) -> Result<(), Error> {
+fn create_file(dir: &Path, filename: &str, content: &str) -> Result<(), Error> {
   let path = dir.join(filename);
 
   if path.exists() {
