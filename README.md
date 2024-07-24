@@ -49,6 +49,10 @@ rc --get <endpoint>
 
 Code-related documentation can be found in the [docs](./docs/) folder.
 
+## Contributing
+
+We appreciate your help! To contribute, please read our [build instructions](./docs/BuildInstructions.md).
+
 ## License
 
 RC is under the **MIT** license.
