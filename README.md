@@ -30,7 +30,7 @@ By default `rc` will create a file in your current folder. If you want to create
 {
     "base": "http://localhost:3000",
     "methods": ["GET", "POST", "DELETE", "PATCH"],
-    "mode": "local"
+    "mode": "Local"
 }
 ```
 
