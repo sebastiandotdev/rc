@@ -20,7 +20,7 @@ Simple REST Client can help you to be more productive by making it easier and fa
 Initialise a configuration file, note that this configuration file is where your base URL will be declared.
 
 ```sh
-rc --init
+rc --init --global --local
 ```
 
 By default `rc` will create a file in your current folder. If you want to create a global file use the `--global` option when initialising the project.
@@ -28,12 +28,13 @@ By default `rc` will create a file in your current folder. If you want to create
 ```jsonc
 // rc.config.json
 {
-    "baseURL": "http://localhost:3000",
-    "methods": ["GET", "POST", "DELETE", "PATCH"]
+    "base": "http://localhost:3000",
+    "methods": ["GET", "POST", "DELETE", "PATCH"],
+    "mode": "local"
 }
 ```
 
-For now rc will only support JSON, it is planned that in future versions we will be able to add support for other files such as .yaml and toml.
+For now rc will only support JSON, it is planned that in future versions we will be able to add support for other files such as `.yaml` and `.toml`.
 
 ## How do I read the documentation?
 
