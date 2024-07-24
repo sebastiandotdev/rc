@@ -3,18 +3,18 @@ name: Feature request
 about: Suggest an idea for this project
 title: ''
 labels: ''
-assignees: ''
+assignees: 'castrogarciajs'
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Description
+> [!IMPORTANT]
+> Describe how I can improve the RC development experience.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Examples
+> [!IMPORTANT]
+> Provides examples of how it should work
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Conclusion
+> [!IMPORTANT]
+> Here you will comment on why and if this feature has a disadvantage and how it can be addressed.
