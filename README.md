@@ -13,6 +13,8 @@ Simple REST Client is an easy-to-use command-line tool for interacting with REST
 
 Simple REST Client can help you to be more productive by making it easier and faster to interact with RESTful APIs. This can help you to get your work done more quickly and efficiently. And even more if you are one of those people who love to use the terminal.
 
+## Installation
+
 ## Your first RC request
 
 Initialise a configuration file, note that this configuration file is where your base URL will be declared.
