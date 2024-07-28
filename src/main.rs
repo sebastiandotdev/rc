@@ -1,7 +1,7 @@
 use clap::Parser;
-use log::info;
+use dirs;
 use serde_json::{json, to_string_pretty, Value};
-use std::io::{Error, Write};
+use std::io::{self, Error, Write};
 use std::path::Path;
 use std::{env, fs};
 
@@ -12,43 +12,58 @@ struct Args {
 
   #[arg(short, long, default_value_t = false)]
   init: bool,
+
+  #[arg(short, long, default_value_t = false)]
+  local: bool,
+
+  #[arg(short, long, default_value_t = false)]
+  global: bool,
 }
 
 fn main() {
   let args = Args::parse();
 
-  match init_project(args) {
-   Ok(()) => {}
-    Err(err) => {
-      eprintln!("{}", err)
-    }    
+  if let Err(err) = init_project(args) {
+    eprintln!("Oh: {}", err)
   }
 }
 
 fn init_project(init_flags: Args) -> Result<(), std::io::Error> {
   let cwd = env::current_dir().expect("Can't read current working directory.");
+  let filename = "rc.config.json";
 
-  let dir = if let Some(dir) = &init_flags.dir {
-    let dir = cwd.join(dir);
-    std::fs::create_dir_all(&dir)?;
-    dir
+  let dir_local = if let Some(dir_local) = &init_flags.dir {
+    let dir_local = cwd.join(dir_local);
+    std::fs::create_dir_all(&dir_local)?;
+    dir_local
   } else {
     cwd
   };
+  let dir_global = dirs::home_dir().expect("Can't determine home directory.");
 
-  if init_flags.init {
-    create_json_file(
-      &dir,
-      "rc.config.json",
-      &json!({
-        "URL": "http://localhost:3000",
-        "methods": ["GET", "POST", "DELETE", "PATCH"],
-        "env": "Local"
-      }),
-    )?;
-    info!("✅ {}", "Project initialized");
+  if init_flags.init && init_flags.local {
+    create_json_file(&dir_local, filename, &return_env_json("Local").unwrap())?;
+
+    println!("✅ Local configuration file created");
+  } else if init_flags.init && init_flags.global {
+    create_json_file(&dir_global, filename, &return_env_json("Global").unwrap())?;
+
+    println!("✅ Global configuration file created");
+  } else {
+    println!("❌ The locale of the file is not specified, please use the --local or --global option depending on your project type.")
   }
+
   Ok(())
+}
+
+fn return_env_json(env: &str) -> Result<serde_json::Value, io::Error> {
+  let result = json!({
+      "URL": "http://localhost:3000",
+      "methods": ["GET", "POST", "DELETE", "PATCH"],
+      "env": env
+  });
+
+  Ok(result)
 }
 
 fn create_json_file(
@@ -67,10 +82,7 @@ fn create_file(dir: &Path, filename: &str, content: &str) -> Result<(), Error> {
   let path = dir.join(filename);
 
   if path.exists() {
-    info!(
-      "ℹ️ {}",
-      format!("Skipped creating {filename} as it already exists")
-    );
+    println!("ℹ️ {}", "Skipped creating {filename} as it already exists");
     Ok(())
   } else {
     let mut file = fs::OpenOptions::new()
