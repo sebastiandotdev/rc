@@ -33,7 +33,7 @@ pub fn create_file(
   let path = dir.join(filename);
 
   if path.exists() {
-    println!("ℹ️ {}", "Skipped creating {filename} as it already exists");
+    println!("✅ {}", "Skipped creating {filename} as it already exists");
     Ok(())
   } else {
     let mut file = fs::OpenOptions::new()

@@ -6,7 +6,7 @@ use crate::{
   utils::{create_json_file, return_env_json},
 };
 
-pub fn init_project(
+pub fn create_file_rc(
   init_flags: &flags::InitFlags,
 ) -> Result<(), std::io::Error> {
   let cwd = env::current_dir().expect("Can't read current working directory.");
