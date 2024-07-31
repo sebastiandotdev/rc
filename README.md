@@ -20,7 +20,7 @@ Simple REST Client can help you to be more productive by making it easier and fa
 Initialise a configuration file, note that this configuration file is where your base URL will be declared.
 
 ```sh
-rc init --local
+rc init
 ```
 
 By default `rc` will create a file in your current folder. If you want to create a global file use the `--global` option when initialising the project.
