@@ -4,10 +4,10 @@ mod utils;
 
 use args::flags::RCSubcommands;
 use clap::Parser;
-use commands::init;
+use commands::init::Init as InitCommand;
 
 #[derive(Parser, Debug)]
-#[command(name = "rc", version, about = "REST Client is an easy-to-use command-line tool for interacting with RESTful APIs.", long_about = None)]
+#[command(name = "rc", version, about, long_about = None)]
 pub struct Cli {
   #[command(subcommand)]
   pub commands: RCSubcommands,
@@ -18,7 +18,7 @@ fn main() {
 
   match &cli.commands {
     RCSubcommands::Init(init_flags) => {
-      if let Err(err) = init::create_file_rc(init_flags) {
+      if let Err(err) = InitCommand::new(init_flags) {
         eprintln!("Oh: {}", err);
       }
     }
