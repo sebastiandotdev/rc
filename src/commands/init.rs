@@ -10,25 +10,16 @@ pub fn create_file_rc(
   init_flags: &flags::InitFlags,
 ) -> Result<(), std::io::Error> {
   let cwd = env::current_dir().expect("Can't read current working directory.");
+  let global_dir = dirs::home_dir().expect("Can't determine home directory.");
   let filename = "rc.config.json";
 
-  let dir_local = if let Some(dir_local) = &init_flags.dir {
-    let dir_local = cwd.join(dir_local);
-    std::fs::create_dir_all(&dir_local)?;
-    dir_local
-  } else {
-    cwd
-  };
-
-  let dir_global = dirs::home_dir().expect("Can't determine home directory.");
-
   if init_flags.local {
-    create_json_file(&dir_local, filename, &return_env_json("Local").unwrap())?;
+    create_json_file(&cwd, filename, &return_env_json("Local").unwrap())?;
 
     println!("✅ Local configuration file created");
   } else if init_flags.global {
     create_json_file(
-      &dir_global,
+      &global_dir,
       filename,
       &return_env_json("Global").unwrap(),
     )?;

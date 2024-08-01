@@ -2,8 +2,6 @@ use clap::{Parser, Subcommand};
 
 #[derive(Parser, Debug)]
 pub struct InitFlags {
-  pub dir: Option<String>,
-
   #[arg(short, long, default_value_t = false)]
   pub local: bool,
 
