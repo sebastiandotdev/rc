@@ -39,7 +39,7 @@ For now rc will only support JSON, it is planned that in future versions we will
 After initialising the project you can use options like `--get` to make a data request.
 
 ```sh
-rc --get <endpoint>
+rc get <endpoint> ...OPTIONS
 ```
 
 ## How do I read the documentation?
