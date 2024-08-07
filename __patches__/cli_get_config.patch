@@ -1,0 +1,119 @@
+diff --git a/Cargo.toml b/Cargo.toml
+--- Cargo.toml
++++ Cargo.toml
+@@ -5,10 +5,11 @@
+ description = "Simple REST Client is an easy-to-use command-line tool for interacting with RESTful APIs."
+ 
+ [dependencies]
+ clap = { version = "4.5.10", features = ["derive"] }
+-dirs = "5.0.1"
+-serde_json = "1.0.120"
++dirs = "5"
++serde = { version = "1", features = ["derive"] }
++serde_json = "1"
+ 
+ [package.metadata.winres]
+ # This section defines the metadata that appears in the rc.exe PE header.
+ OriginalFilename = "rc.exe"
+diff --git a/src/args/flags.rs b/src/args/flags.rs
+--- src/args/flags.rs
++++ src/args/flags.rs
+@@ -1,8 +1,9 @@
+ use clap::{Parser, Subcommand};
+ 
+ #[derive(Parser, Debug)]
+ pub struct InitFlags {
++  /// akjshdkashdkjasjkdh
+   #[arg(short, long, default_value_t = false)]
+   pub global: bool,
+ }
+ 
+diff --git a/src/cli.rs b/src/cli.rs
+--- src/cli.rs
++++ src/cli.rs
+@@ -3,11 +3,56 @@
+ 
+ #[derive(Parser, Debug)]
+ #[command(name = "rc", version, about, long_about = None)]
+ pub struct Cli {
++  /// Set custom config file path
++  #[clap(short, long)]
++  config: PatBuf,
+   #[command(subcommand)]
+   pub commands: RCSubcommands,
+ }
+ 
+ pub fn parse() -> Cli {
+   Cli::parse()
+ }
++
++pub fn get_config() -> Result<Cli, ConfigurationError> {
++  // -c/--config
++  let mut args = ClapConfig::parse();
++
++  let config_path = if let Some(path) = args.config.as_ref() {
++      tracing::trace!("Loading custom path");
++      path.clone()
++  } else {
++      let config_path = directories::BaseDirs::new()
++          .ok_or(ConfigurationError::InvalidHome)?
++          .config_dir()
++          .join("rc");
++
++      let _ = std::fs::create_dir_all(config_path.clone());
++
++      tracing::trace!("Loading global config");
++      config_path.join("rc.config.json")
++  };
++  tracing::info!("Reading configs from path: {config_path:?}");
++
++  if let Ok(cfg_content) = std::fs::read_to_string(config_path) {
++      tracing::debug!("Merging from config file");
++      let mut config: Config = serde_json::from_str(&cfg_content)?; // carga la config global
++      
++      // Carga la config local
++      if let Ok(local_raw) = env::current_dir().and_then(|dir| std::fs::read_to_string(&dir)).flatten() {
++        if let Ok(mut data_local) = serde_json::from_str(&local_raw) {
++          config.merge(&mut data_local);
++        }
++      } else {
++        // guardar datos local
++      }
++
++      // mergea ambas con remplazado por los argumentos
++      config.merge(&mut args);
++      return Ok(config);
++  } else {
++    // crear el global desde el path config_path
++  }
++  Ok(args.code.unwrap_or_default())
++}
+\ No newline at end of file
+diff --git a/src/utils.rs b/src/utils.rs
+--- src/utils.rs
++++ src/utils.rs
+@@ -2,8 +2,24 @@
+ use std::fs;
+ use std::io::{Error, Write};
+ use std::path::Path;
+ 
++#[derive(Serialize, Deserialize, Merge)]
++struct Config {
++  url: String,
++  methods: Vec<Method>,
++  env: String,
++}
++
++#[derive(Serialize, Deserialize)]
++enum Method {
++  GET,
++  POST,
++  DELETE,
++  PUT,
++  PATCH
++}
++
+ pub fn return_env_json(env: &str) -> Result<serde_json::Value, Error> {
+   let result = json!({
+       "URL": "http://localhost:3000",
+       "methods": ["GET", "POST", "DELETE", "PATCH"],
