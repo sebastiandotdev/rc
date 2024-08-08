@@ -1,24 +1,15 @@
 use dirs;
+use anyhow::{bail, Context, Error as AnyError};
 use std::env;
-use std::io::{Error as ErrorIO, ErrorKind};
 
 use crate::{args::flags, utils};
 
 pub struct Init;
 
 impl Init {
-  pub fn new(init_flags: &flags::InitFlags) -> Result<(), ErrorIO> {
-    let cwd = env::current_dir().map_err(|e| {
-      eprintln!("❌ Can't read current working directory: {:?}", e);
-      ErrorIO::new(ErrorKind::NotFound, e)
-    })?;
-
-    let global_dir = dirs::home_dir().ok_or_else(|| {
-      let e = "Can't determine home directory.";
-
-      eprintln!("❌ Can't determine home directory.: {:?}", e);
-      ErrorIO::new(ErrorKind::NotFound, e)
-    })?;
+  pub fn new(init_flags: &flags::InitFlags) -> Result<(), AnyError> {
+    let cwd = env::current_dir().context("Can't read current working directory.")?;
+    let global_dir = dirs::home_dir().context("❌ Can't determine home directory.: {:?}")?;
 
     let filename = "rc.config.json";
 
@@ -39,9 +30,7 @@ impl Init {
         Ok(())
       }
       Err(e) => {
-        eprintln!("❌ Failed to create configuration file: {:?}", e);
-
-        Err(ErrorIO::new(ErrorKind::Other, e))
+        bail!("❌ Failed to create configuration file: {:?}", e)
       }
     }
   }

@@ -39,8 +39,7 @@ pub fn create_file(
     let mut file = fs::OpenOptions::new()
       .write(true)
       .create_new(true)
-      .open(path)
-      .expect("Failed to create {filename} file");
+      .open(path)?;
 
     file.write_all(content.as_bytes())?;
     Ok(())
