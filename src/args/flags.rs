@@ -6,7 +6,16 @@ pub struct InitFlags {
   pub global: bool,
 }
 
+#[derive(Parser, Debug)]
+pub struct GetFlags {
+  path: String,
+
+  #[arg(short, long)]
+  pub id: Option<String>,
+}
+
 #[derive(Subcommand, Debug)]
 pub enum RCSubcommands {
   Init(InitFlags),
+  Get(GetFlags),
 }
