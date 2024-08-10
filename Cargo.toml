@@ -6,10 +6,10 @@ description = "Simple REST Client is an easy-to-use command-line tool for intera
 
 [dependencies]
 clap = { version = "4.5.10", features = ["derive"] }
-dirs = "5"
-anyhow = "1.0"
+anyhow = "1.0.57"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+dirs = "5.0.1"
 
 [package.metadata.winres]
 # This section defines the metadata that appears in the rc.exe PE header.
