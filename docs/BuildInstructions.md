@@ -25,7 +25,7 @@ cargo -V
 Build with Cargo:
 
 ````sh
-cargo build
+cargo build --relase
 
 # Build errors?  Ensure you have latest main and try building again, or if that doesn't work try:
 cargo clean && cargo build
