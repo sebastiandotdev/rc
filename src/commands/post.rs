@@ -1,5 +1,5 @@
-use anyhow::Error;
 use crate::args::flags;
+use anyhow::Error;
 
 pub struct Post;
 

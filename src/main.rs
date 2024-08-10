@@ -1,6 +1,6 @@
+mod actions;
 mod args;
 mod commands;
-mod actions;
 mod models;
 mod utils;
 
