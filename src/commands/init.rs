@@ -1,5 +1,5 @@
-use dirs;
 use anyhow::{bail, Context, Error as AnyError};
+use dirs;
 use std::env;
 
 use crate::{args::flags, utils};
@@ -8,8 +8,10 @@ pub struct Init;
 
 impl Init {
   pub fn new(init_flags: &flags::InitFlags) -> Result<(), AnyError> {
-    let cwd = env::current_dir().context("Can't read current working directory.")?;
-    let global_dir = dirs::home_dir().context("❌ Can't determine home directory.: {:?}")?;
+    let cwd =
+      env::current_dir().context("Can't read current working directory.")?;
+    let global_dir =
+      dirs::home_dir().context("❌ Can't determine home directory.: {:?}")?;
 
     let filename = "rc.config.json";
 

@@ -1,3 +1,4 @@
+use crate::models::RCConfig;
 use serde_json::{json, to_string_pretty, Value};
 use std::fs;
 use std::io::{Error, Write};
@@ -44,4 +45,8 @@ pub fn create_file(
     file.write_all(content.as_bytes())?;
     Ok(())
   }
+}
+
+pub fn read_config_file(rc_config: RCConfig) {
+  println!("{:?}", rc_config)
 }
