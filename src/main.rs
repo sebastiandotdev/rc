@@ -1,15 +1,31 @@
 mod args;
-mod cli;
 mod commands;
+mod actions;
 mod models;
 mod utils;
 
 use args::flags::RCSubcommands;
+use clap::Parser;
+use commands::delete::Delete as DeleteCommand;
 use commands::get::Get as GetCommand;
 use commands::init::Init as InitCommand;
+use commands::patch::Patch as PatchCommand;
+use commands::post::Post as PostCommand;
+use commands::put::Put as PutCommand;
+
+#[derive(Parser, Debug)]
+#[command(name = "rc", version, about, long_about = None)]
+pub struct Cli {
+  #[command(subcommand)]
+  pub commands: RCSubcommands,
+}
+
+pub fn parse() -> Cli {
+  Cli::parse()
+}
 
 fn main() {
-  let values = crate::cli::parse();
+  let values = parse();
 
   match &values.commands {
     RCSubcommands::Init(init_flags) => {
@@ -20,6 +36,30 @@ fn main() {
 
     RCSubcommands::Get(get_flags) => {
       if let Err(err) = GetCommand::new(get_flags) {
+        eprintln!("Oh: {}", err);
+      }
+    }
+
+    RCSubcommands::Post(post_flags) => {
+      if let Err(err) = PostCommand::new(post_flags) {
+        eprintln!("Oh: {}", err);
+      }
+    }
+
+    RCSubcommands::Delete(delete_flags) => {
+      if let Err(err) = DeleteCommand::new(delete_flags) {
+        eprintln!("Oh: {}", err);
+      }
+    }
+
+    RCSubcommands::Patch(patch_flags) => {
+      if let Err(err) = PatchCommand::new(patch_flags) {
+        eprintln!("Oh: {}", err);
+      }
+    }
+
+    RCSubcommands::Put(patch_flags) => {
+      if let Err(err) = PutCommand::new(patch_flags) {
         eprintln!("Oh: {}", err);
       }
     }
