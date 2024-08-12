@@ -28,7 +28,7 @@ By default `rc` will create a file in your current folder. If you want to create
 ```jsonc
 // rc.config.json
 {
-    "URL": "http://localhost:3000",
+    "url": "http://localhost:3000",
     "methods": ["GET", "POST", "DELETE", "PATCH"],
     "env": "Local"
 }
