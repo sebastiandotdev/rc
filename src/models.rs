@@ -15,6 +15,13 @@ pub enum Env {
   Global,
 }
 
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct RCConfig {
+  pub url: String,
+  pub methods: Vec<Methods>,
+  pub env: Env,
+}
+
 impl Methods {
   pub fn from_str(method: &str) -> Option<Self> {
     match method {
@@ -36,11 +43,4 @@ impl Env {
       _ => None,
     }
   }
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct RCConfig {
-  pub url: String,
-  pub methods: Vec<Methods>,
-  pub env: Env,
 }
