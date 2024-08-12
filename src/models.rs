@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum Methods {
   GET,
   POST,
@@ -9,8 +9,8 @@ pub enum Methods {
   PATCH,
 }
 
-#[derive(Debug, Clone, Deserialize)]
-enum Env {
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub enum Env {
   Local,
   Global,
 }
@@ -38,9 +38,9 @@ impl Env {
   }
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct RCConfig {
   pub url: String,
   pub methods: Vec<Methods>,
-  pub env: String,
+  pub env: Env,
 }

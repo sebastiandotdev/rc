@@ -1,28 +1,32 @@
-use crate::models::RCConfig;
-use serde_json::{json, to_string_pretty, Value};
+use crate::models::{Env, Methods, RCConfig};
 use std::fs;
 use std::io::{Error, Write};
 use std::path::Path;
 
-pub fn return_env_json(env: &str) -> Result<serde_json::Value, Error> {
-  let result = json!({
-      "URL": "http://localhost:3000",
-      "methods": ["GET", "POST", "DELETE", "PATCH"],
-      "env": env
-  });
+pub fn return_env_json(env: &str) -> Result<String, Error> {
+  let method_names = ["GET", "POST", "DELETE", "PUT", "PATCH"];
+  let methods = method_names
+    .iter()
+    .map(|&method| Methods::from_str(method).unwrap())
+    .collect();
 
-  Ok(result)
+  let config_rc = RCConfig {
+    url: String::from("http://localhost:3000"),
+    env: Env::from_str(env).unwrap(),
+    methods,
+  };
+
+  Ok(serde_json::to_string_pretty(&config_rc)?)
 }
 
 pub fn create_json_file(
   dir: &Path,
   filename: &str,
-  value: &Value,
+  value: &str,
 ) -> Result<(), Error> {
-  let mut text = to_string_pretty(value)?;
+  let mut text = String::from(value);
 
   text.push('\n');
-
   create_file(dir, filename, &text)
 }
 
@@ -45,8 +49,4 @@ pub fn create_file(
     file.write_all(content.as_bytes())?;
     Ok(())
   }
-}
-
-pub fn read_config_file(rc_config: RCConfig) {
-  println!("{:?}", rc_config)
 }
