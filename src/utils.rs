@@ -1,4 +1,4 @@
-use crate::models::{Env, Methods, RCConfig};
+use crate::models::{Env, Headers, Methods, RCConfig};
 use anyhow::{bail, Context, Error as ErrorAnyhow, Result as ResultAnyhow};
 use serde_json::from_str as from_json;
 use std::io::{Error, Write};
@@ -12,10 +12,16 @@ pub fn return_env_json(env: &str) -> Result<String, Error> {
     .map(|&method| Methods::from_str(method).unwrap())
     .collect();
 
+  let headers = Headers {
+    authorization: String::from("Bearer <your-token>"),
+    content_type: String::from("application/json"),
+  };
+
   let config_rc = RCConfig {
     url: String::from("http://localhost:3000"),
     env: Env::from_str(env).unwrap(),
     methods,
+    headers,
   };
 
   Ok(serde_json::to_string_pretty(&config_rc)?)
