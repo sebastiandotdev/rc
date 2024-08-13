@@ -21,7 +21,7 @@ pub struct Headers {
   pub authorization: String,
 
   #[serde(rename = "Content-Type")]
-  pub content_type: String
+  pub content_type: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -29,7 +29,7 @@ pub struct RCConfig {
   pub url: String,
   pub methods: Vec<Methods>,
   pub env: Env,
-  pub headers: Headers
+  pub headers: Headers,
 }
 
 impl Methods {
