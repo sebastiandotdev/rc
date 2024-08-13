@@ -1,7 +1,7 @@
 use crate::models::{Env, Methods, RCConfig};
-use anyhow::{bail, Context, Error, Result as ResultAnyhow};
+use anyhow::{bail, Context, Error as ErrorAnyhow, Result as ResultAnyhow};
 use serde_json::from_str as from_json;
-use std::io::Write;
+use std::io::{Error, Write};
 use std::path::Path;
 use std::{env, fs};
 
@@ -65,7 +65,7 @@ fn parse_config_file(path: &Path) -> ResultAnyhow<RCConfig> {
   Ok(config)
 }
 
-pub fn read_config_file() -> Result<RCConfig, Error> {
+pub fn read_config_file() -> Result<RCConfig, ErrorAnyhow> {
   let filename = "rc.config.json";
 
   if let Some(home_dir) = dirs::home_dir() {
