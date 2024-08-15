@@ -2,6 +2,7 @@ mod actions;
 mod args;
 mod commands;
 mod models;
+mod http;
 mod utils;
 
 use args::flags::RCSubcommands;
@@ -23,8 +24,8 @@ pub struct Cli {
 pub fn parse() -> Cli {
   Cli::parse()
 }
-
-fn main() {
+#[tokio::main]
+async fn main() {
   let values = parse();
 
   match &values.commands {
@@ -35,7 +36,7 @@ fn main() {
     }
 
     RCSubcommands::Get(get_flags) => {
-      if let Err(err) = GetCommand::new(get_flags) {
+      if let Err(err) = GetCommand::new(get_flags).await {
         eprintln!("Oh: {}", err);
       }
     }

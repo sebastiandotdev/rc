@@ -1,14 +1,15 @@
 use anyhow::Error;
-
-use crate::{args::flags, utils::read_config_file};
+use reqwest::Method;
+use crate::args::flags;
+use crate::http::http;
 
 pub struct Get;
 
 impl Get {
-  pub fn new(get_flags: &flags::GetFlags) -> Result<(), Error> {
-    let config_rc = read_config_file()?;
+  pub async fn new(get_flags: &flags::GetFlags) -> Result<(), Error> {
+    let fetch = http(Method::GET, &get_flags.path, None).await?;
 
-    println!("{:?}", config_rc);
+    println!("GET Response: {:?}", fetch.text().await?);
 
     if let Some(id) = &get_flags.id {
       println!("O my is a id: {id}")

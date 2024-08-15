@@ -9,7 +9,7 @@ pub struct InitFlags {
 
 #[derive(Parser, Debug)]
 pub struct GetFlags {
-  path: String,
+  pub path: String,
 
   #[arg(short, long)]
   pub id: Option<String>,
