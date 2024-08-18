@@ -2,7 +2,6 @@ mod actions;
 mod args;
 mod commands;
 mod models;
-mod http;
 mod utils;
 
 use args::flags::RCSubcommands;

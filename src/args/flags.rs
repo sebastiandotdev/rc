@@ -35,21 +35,15 @@ pub enum RCSubcommands {
   #[command(about = "Make an http GET request to an external or local server")]
   Get(GetFlags),
 
-  #[command(
-    about = "Make an http POST request to an external or local server"
-  )]
+  #[command(about = "Make an http POST request to an external or local server")]
   Post(PostFlags),
 
-  #[command(
-    about = "Make an http DELETE request to an external or local server"
-  )]
+  #[command(about = "Make an http DELETE request to an external or local server")]
   Delete(DeleteFlags),
 
   #[command(about = "Make an http PUT request to an external or local server")]
   Put(PutFlags),
 
-  #[command(
-    about = "Make an http PATCH request to an external or local server"
-  )]
+  #[command(about = "Make an http PATCH request to an external or local server")]
   Patch(PatchFlags),
 }
