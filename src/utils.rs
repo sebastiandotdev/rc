@@ -27,22 +27,14 @@ pub fn return_env_json(env: &str) -> Result<String, Error> {
   Ok(serde_json::to_string_pretty(&config_rc)?)
 }
 
-pub fn create_json_file(
-  dir: &Path,
-  filename: &str,
-  value: &str,
-) -> Result<(), Error> {
+pub fn create_json_file(dir: &Path, filename: &str, value: &str) -> Result<(), Error> {
   let mut text = String::from(value);
 
   text.push('\n');
   create_file(dir, filename, &text)
 }
 
-pub fn create_file(
-  dir: &Path,
-  filename: &str,
-  content: &str,
-) -> Result<(), Error> {
+pub fn create_file(dir: &Path, filename: &str, content: &str) -> Result<(), Error> {
   let path = dir.join(filename);
 
   if path.exists() {
@@ -60,13 +52,11 @@ pub fn create_file(
 }
 
 fn parse_config_file(path: &Path) -> ResultAnyhow<RCConfig> {
-  let file_content = fs::read_to_string(path).with_context(|| {
-    format!("Failed to read configuration file at {:?}", path)
-  })?;
+  let file_content = fs::read_to_string(path)
+    .with_context(|| format!("Failed to read configuration file at {:?}", path))?;
 
-  let config: RCConfig = from_json(&file_content).with_context(|| {
-    format!("Failed to parse JSON in configuration file at {:?}", path)
-  })?;
+  let config: RCConfig = from_json(&file_content)
+    .with_context(|| format!("Failed to parse JSON in configuration file at {:?}", path))?;
 
   Ok(config)
 }
