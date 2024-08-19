@@ -13,6 +13,9 @@ pub struct GetFlags {
 
   #[arg(short, long)]
   pub id: Option<String>,
+
+  #[arg(short, long)]
+  pub query: Option<String>,
 }
 
 #[derive(Debug, Parser)]
