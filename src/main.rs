@@ -1,4 +1,3 @@
-mod actions;
 mod args;
 mod commands;
 mod models;
