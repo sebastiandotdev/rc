@@ -44,9 +44,7 @@ By default `rc` will create a file in your current folder. If you want to create
 }
 ```
 
-For now rc will only support JSON, it is planned that in future versions we will be able to add support for other files such as `.yaml` and `.toml`.
-
-After initialising the project you can use command like `get` to make a data request.
+For now rc will only support JSON, it is planned that in future versions we will be able to add support for other files such as `.yaml` and `.toml`. After initialising the project you can use command like `get` to make a data request.
 
 ```sh
 rc get <endpoint> ...OPTIONS
