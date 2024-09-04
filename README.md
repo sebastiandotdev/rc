@@ -28,7 +28,7 @@ By default `rc` will create a file in your current folder. If you want to create
 ```jsonc
 // rc.config.json
 {
-  "url": "http://localhost:3000",
+  "url": "https://jsonplaceholder.typicode.com",
   "methods": [
     "GET",
     "POST",
@@ -47,9 +47,14 @@ By default `rc` will create a file in your current folder. If you want to create
 For now rc will only support JSON, it is planned that in future versions we will be able to add support for other files such as `.yaml` and `.toml`. After initialising the project you can use command like `get` to make a data request.
 
 ```sh
-rc get persons
+rc get todos --id 1
 
-# { ...DATA }
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
 ```
 
 ## How do I read the documentation?
