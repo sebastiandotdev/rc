@@ -19,7 +19,15 @@ pub struct GetFlags {
 }
 
 #[derive(Debug, Parser)]
-pub struct PostFlags {}
+pub struct PostFlags {
+  pub path: String,
+
+  #[arg(short, long)]
+  pub id: Option<String>,
+
+  #[arg(short, long)]
+  pub query: Option<String>,
+}
 
 #[derive(Debug, Parser)]
 pub struct DeleteFlags {}
