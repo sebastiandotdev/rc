@@ -40,7 +40,7 @@ async fn main() {
     }
 
     RCSubcommands::Post(post_flags) => {
-      if let Err(err) = PostCommand::new(post_flags) {
+      if let Err(err) = PostCommand::new(post_flags).await {
         eprintln!("Oh: {}", err);
       }
     }
